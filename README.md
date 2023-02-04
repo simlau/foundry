@@ -1,8 +1,26 @@
+## Setup 
+
+```bash
+apt update
+apt upgrade
+apt install docker.io
+apt install docker-compose
+apt install apache2-utils
+```
+
+
+## Add A records for
+
+- traefik.simlau.dk
+- ddb-proxy.simlau.dk
+- foundry.simlau.dk
+
+
 ## Create user for running Foundry
 
 ```bash
-useradd -m -s /bin/bash kermie
-usermod -a -G docker kermie
+useradd -m -s /bin/bash simlau
+usermod -a -G docker simlau
 ```
 
 ## Configure Traefik
@@ -26,6 +44,13 @@ Set user and password for Traefik, note the extra `$` in front of the encrypted 
 traefik.http.middlewares.authtraefik.basicauth.users=admin:$$encrypted
 ```
 
+## Start foundry
+
+```bash
+docker-compose start foundry
+```
+
+
 ## Configure backup job
 
 ```bash
@@ -34,7 +59,7 @@ su - kermie
 
 # Configure backup job
 crontab -l > cron
-echo "0 0 * * WED /home/kermie/backup.sh" >> cron
+echo "0 0 * * WED /home/simlau/backup.sh" >> cron
 crontab cron
 rm cron
 ```

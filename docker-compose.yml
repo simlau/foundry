@@ -10,7 +10,7 @@ services:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
       - --api
-      - --certificatesresolvers.le.acme.email=ksj2209@gmail.com
+      - --certificatesresolvers.le.acme.email=mail@simlau.dk
       - --certificatesresolvers.le.acme.storage=./acme.json
       - --certificatesresolvers.le.acme.tlschallenge=true
     ports:
@@ -20,11 +20,11 @@ services:
       - proxy
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/home/kermie/traefik/acme.json:/acme.json"
+      - "/home/simlau/traefik/acme.json:/acme.json"
     labels:
       - "traefik.enable=true"
       # Dashboard
-      - "traefik.http.routers.traefik.rule=Host(`traefik.sejrsgaard-jacobsen.dk`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.simlau.dk`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.tls.certresolver=le"
@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ddb-proxy.rule=Host(`ddb-proxy.sejrsgaard-jacobsen.dk`)"
+      - "traefik.http.routers.ddb-proxy.rule=Host(`ddb-proxy.simlau.dk`)"
       - "traefik.http.routers.ddb-proxy.entrypoints=websecure"
       - "traefik.http.routers.ddb-proxy.tls=true"
       - "traefik.http.routers.ddb-proxy.tls.certresolver=le"
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.foundry.rule=Host(`foundry.sejrsgaard-jacobsen.dk`)"
+      - "traefik.http.routers.foundry.rule=Host(`foundry.simlau.dk`)"
       - "traefik.http.routers.foundry.entrypoints=websecure"
       - "traefik.http.routers.foundry.tls=true"
       - "traefik.http.routers.foundry.tls.certresolver=le"
@@ -72,7 +72,7 @@ services:
       - FOUNDRY_PASSWORD=
       - FOUNDRY_ADMIN_KEY=
     volumes:
-      - /home/kermie/foundry:/data
+      - /home/simlau/foundry:/data
     networks:
       - proxy
 
