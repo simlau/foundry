@@ -26,6 +26,7 @@ usermod -a -G docker simlau
 ## Configure Traefik
 
 ```
+su - simlau
 mkdir -p traefik
 cd traefik
 
@@ -47,7 +48,8 @@ traefik.http.middlewares.authtraefik.basicauth.users=admin:$$encrypted
 ## Start foundry
 
 ```bash
-docker-compose start foundry
+docker network create proxy
+docker-compose up
 ```
 
 
@@ -55,7 +57,7 @@ docker-compose start foundry
 
 ```bash
 # Login as user
-su - kermie
+su - simalu
 
 # Configure backup job
 crontab -l > cron
