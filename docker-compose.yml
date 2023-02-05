@@ -39,21 +39,6 @@ services:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
     container_name: traefik
     restart: unless-stopped
-  ddb-proxy:
-    image: ghcr.io/mrprimate/ddb-proxy:latest
-    hostname: ddb-proxy
-    container_name: ddb-proxy
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ddb-proxy.rule=Host(`ddb-proxy.simlau.dk`)"
-      - "traefik.http.routers.ddb-proxy.entrypoints=websecure"
-      - "traefik.http.routers.ddb-proxy.tls=true"
-      - "traefik.http.routers.ddb-proxy.tls.certresolver=le"
-    ports:
-      - 3000:3000
-    networks:
-      - proxy
   foundry:
     image: felddy/foundryvtt:release
     hostname: foundry
